@@ -1,0 +1,22 @@
+## bash sous Debian9 (David):
+$ echo -n foobar | sha256sum
+c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2  -
+
+
+$ echo -n foobar | sha256sum | cut -d ' ' -f1
+c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2
+
+
+#### Test avec python 3.6.
+
+In [1]: import hashlib
+
+In [2]: import unicodedata
+
+In [3]: key = "foobar"
+
+In [4]: hashlib.sha256(key.encode("utf-8")).hexdigest()
+
+Out[4]: 'c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2'
+
+
