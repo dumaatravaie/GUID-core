@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # Test possibilty of Duplication of GUID for first 10 characters of hash
 # Dipankar Bachar 
-# Written in 25/7/2019
+# Updated Version
+# Written in 29/10/2019
 # Runs with Python 2
 """This scripts produces more then 1million unique combination of name,surname,dateofbirth,sex from
 the file name.csv which is a tsv file and produces GUID for each combination, and checks whether there is
@@ -45,9 +46,19 @@ def text_to_id(text):
     :returns: The processed String.
     :rtype: String.
     """
+    #print text
     text = strip_accents(text.lower())
     text = re.sub('[ ]+', '_', text)
     text = re.sub('[^0-9a-zA-Z_-]', '', text)
+    text = re.sub('-', '', text)
+    text = re.sub('_', '', text)
+    text = text.replace('\/', '')
+    text = text.replace('\\', '')
+    #text = re.sub('\\', '', text)
+    #text = re.sub('\/', '', text)
+    #text = text.replace('-', '')
+    #text = text.replace('_', '')
+    #print text
     return text
 
 container_final={}
@@ -59,6 +70,9 @@ C5=[]
 C6=[]
 # reads the csv file in tsv format and stores each columns in a separate list
 infile="./name.csv"
+
+#infile="./test.csv"
+
 inf=open(infile,"r")
 for l in inf:
 	k=l.strip().split()
@@ -71,51 +85,61 @@ for l in inf:
 inf.close()
 
 # Produces the combination from the 6 columns data ( 6 lists ) to use as a input for hash alogorithm SHA
+#print "-------------------------- \n"
+for i in range(0,len(C1)):
+	if C1[i]!="NULL":
+		for j in range(0,len(C2)):
+			new_string=text_to_id(C1[i])+text_to_id(C2[j])+text_to_id(C3[j])+text_to_id(C4[j])+text_to_id(C5[j])+text_to_id(C6[j]).lower()
+			#print new_string
+			if not container_final.has_key(new_string):
+				container_final[new_string]=1
+#print "-------------------------- \n"				
+# More combination
+for i in range(0,len(C1)):
+	if C1[i]!="NULL":
+		for j in range(0,len(C2)):
+			new_string=text_to_id(C1[i]+"abcd")+text_to_id(C2[j]+"bc")+text_to_id(C3[j])+text_to_id(C4[j])+text_to_id(C5[j])+text_to_id(C6[j]).lower()
+			#print new_string
+			if not container_final.has_key(new_string):
+				container_final[new_string]=1
+#print "-------------------------- \n"
+# More combination
+for i in range(0,len(C1)):
+	if C1[i]!="NULL":
+		for j in range(0,len(C2)):
+			new_string=text_to_id(C1[i]+"cd")+text_to_id(C2[j]+"ef")+text_to_id(C3[j])+text_to_id(C4[j])+text_to_id(C5[j])+text_to_id(C6[j]).lower()
+			#print new_string
+			if not container_final.has_key(new_string):
+				container_final[new_string]=1
+#print "-------------------------- \n"				
+# More combination
+for i in range(0,len(C1)):
+	if C1[i]!="NULL":
+		for j in range(0,len(C2)):
+			new_string=text_to_id(C1[i]+"gh")+text_to_id(C2[j]+"ij")+text_to_id(C3[j])+text_to_id(C4[j])+text_to_id(C5[j])+text_to_id(C6[j]).lower()
+			#print new_string
+			if not container_final.has_key(new_string):
+				container_final[new_string]=1
+#print "-------------------------- \n"
 
-for i in range(0,len(C1)):
-	if C1[i]!="NULL":
-		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i])+text_to_id(C2[j])+C3[j]+C4[j]+C5[j]+C6[j].lower()
-			if not container_final.has_key(new_string):
-				container_final[new_string]=1
-				
-# More combination
-for i in range(0,len(C1)):
-	if C1[i]!="NULL":
-		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"abcd")+text_to_id(C2[j]+"bc")+C3[j]+C4[j]+C5[j]+C6[j].lower()
-			if not container_final.has_key(new_string):
-				container_final[new_string]=1
-# More combination
-for i in range(0,len(C1)):
-	if C1[i]!="NULL":
-		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"cd")+text_to_id(C2[j]+"ef")+C3[j]+C4[j]+C5[j]+C6[j].lower()
-			if not container_final.has_key(new_string):
-				container_final[new_string]=1
-				
-# More combination
-for i in range(0,len(C1)):
-	if C1[i]!="NULL":
-		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"gh")+text_to_id(C2[j]+"ij")+C3[j]+C4[j]+C5[j]+C6[j].lower()
-			if not container_final.has_key(new_string):
-				container_final[new_string]=1
 # More combination				
 for i in range(0,len(C1)):
 	if C1[i]!="NULL":
 		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"kl")+text_to_id(C2[j]+"mn")+C3[j]+C4[j]+C5[j]+C6[j].lower()
+			new_string=text_to_id(C1[i]+"kl")+text_to_id(C2[j]+"mn")+text_to_id(C3[j])+text_to_id(C4[j])+text_to_id(C5[j])+text_to_id(C6[j]).lower()
+			#print new_string
 			if not container_final.has_key(new_string):
 				container_final[new_string]=1
+#print "-------------------------- \n"
 # More combination
 for i in range(0,len(C1)):
 	if C1[i]!="NULL":
 		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"op")+text_to_id(C2[j]+"qr")+C3[j]+C4[j]+C5[j]+C6[j].lower()
+			new_string=text_to_id(C1[i]+"op")+text_to_id(C2[j]+"qr")+text_to_id(C3[j])+text_to_id(C4[j])+text_to_id(C5[j])+text_to_id(C6[j]).lower()
+			#print new_string
 			if not container_final.has_key(new_string):
 				container_final[new_string]=1
-				
+
 
 print "Total Number of Combination = "+str(len(container_final))
 print "------------------------------------------------- \n "
