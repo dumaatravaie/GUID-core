@@ -1,12 +1,13 @@
 #!/usr/bin/python
 # Test possibilty of Duplication of GUID for first 10 characters of hash
-# Dipankar Bachar 
-# Written in 25/7/2019
+# Dipankar Bachar
+# Updated Version
+# Written in 29/10/2019
 # Runs with Python 3 
 """This scripts produces more then 1million unique combination of name,surname,dateofbirth,sex from
 the file name.csv which is a tsv file and produces GUID for each combination, and checks whether there is
 any repetation of GUID ( That is Duplicate GUID ) """
-"""Written in python 3
+"""Written in python 3 
 Users can add, or remove more test data in the name.csv file and run this script to check the possibility of duplication of GUID 
 For running the program:
 Keep the file name.csv and this python script in the same folder and run with python 3 from command line """
@@ -48,6 +49,10 @@ def text_to_id(text):
     text = strip_accents(text.lower())
     text = re.sub('[ ]+', '_', text)
     text = re.sub('[^0-9a-zA-Z_-]', '', text)
+    text = re.sub('-', '', text)
+    text = re.sub('_', '', text)
+    text = text.replace('\/', '')
+    text = text.replace('\\', '')
     return text
 
 container_final={}
@@ -75,7 +80,7 @@ inf.close()
 for i in range(0,len(C1)):
 	if C1[i]!="NULL":
 		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i])+text_to_id(C2[j])+C3[j]+C4[j]+C5[j]+C6[j].lower()
+			new_string=text_to_id(C1[i])+text_to_id(C2[j])+text_to_id(C3[j]+C4[j]+C5[j]+C6[j]).lower()
 #			if not container_final.has_key(new_string):
 			if new_string not in container_final:
 				container_final[new_string]=1
@@ -84,7 +89,7 @@ for i in range(0,len(C1)):
 for i in range(0,len(C1)):
 	if C1[i]!="NULL":
 		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"abcd")+text_to_id(C2[j]+"bc")+C3[j]+C4[j]+C5[j]+C6[j].lower()
+			new_string=text_to_id(C1[i]+"abcd")+text_to_id(C2[j]+"bc")+text_to_id(C3[j]+C4[j]+C5[j]+C6[j]).lower()
 #			if not container_final.has_key(new_string):
 			if new_string not in container_final:
 				container_final[new_string]=1
@@ -92,7 +97,7 @@ for i in range(0,len(C1)):
 for i in range(0,len(C1)):
 	if C1[i]!="NULL":
 		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"cd")+text_to_id(C2[j]+"ef")+C3[j]+C4[j]+C5[j]+C6[j].lower()
+			new_string=text_to_id(C1[i]+"cd")+text_to_id(C2[j]+"ef")+text_to_id(C3[j]+C4[j]+C5[j]+C6[j]).lower()
 #			if not container_final.has_key(new_string):
 			if new_string not in container_final:
 				container_final[new_string]=1
@@ -101,7 +106,7 @@ for i in range(0,len(C1)):
 for i in range(0,len(C1)):
 	if C1[i]!="NULL":
 		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"gh")+text_to_id(C2[j]+"ij")+C3[j]+C4[j]+C5[j]+C6[j].lower()
+			new_string=text_to_id(C1[i]+"gh")+text_to_id(C2[j]+"ij")+text_to_id(C3[j]+C4[j]+C5[j]+C6[j]).lower()
 #			if not container_final.has_key(new_string):
 			if new_string not in container_final:
 				container_final[new_string]=1
@@ -109,7 +114,7 @@ for i in range(0,len(C1)):
 for i in range(0,len(C1)):
 	if C1[i]!="NULL":
 		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"kl")+text_to_id(C2[j]+"mn")+C3[j]+C4[j]+C5[j]+C6[j].lower()
+			new_string=text_to_id(C1[i]+"kl")+text_to_id(C2[j]+"mn")+text_to_id(C3[j]+C4[j]+C5[j]+C6[j]).lower()
 #			if not container_final.has_key(new_string):
 			if new_string not in container_final:
 				container_final[new_string]=1
@@ -117,7 +122,7 @@ for i in range(0,len(C1)):
 for i in range(0,len(C1)):
 	if C1[i]!="NULL":
 		for j in range(0,len(C2)):
-			new_string=text_to_id(C1[i]+"op")+text_to_id(C2[j]+"qr")+C3[j]+C4[j]+C5[j]+C6[j].lower()
+			new_string=text_to_id(C1[i]+"op")+text_to_id(C2[j]+"qr")+text_to_id(C3[j]+C4[j]+C5[j]+C6[j]).lower()
 #			if not container_final.has_key(new_string):
 			if new_string not in container_final:
 				container_final[new_string]=1
