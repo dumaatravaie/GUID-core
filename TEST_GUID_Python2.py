@@ -47,7 +47,7 @@ def text_to_id(text):
     :rtype: String.
     """
     #print text
-    text = strip_accents(text.lower())
+    text = strip_accents(text)
     text = re.sub('[ ]+', '_', text)
     text = re.sub('[^0-9a-zA-Z_-]', '', text)
     text = re.sub('-', '', text)
@@ -59,7 +59,7 @@ def text_to_id(text):
     #text = text.replace('-', '')
     #text = text.replace('_', '')
     #print text
-    return text
+    return text.upper()
 
 container_final={}
 C1=[]
@@ -73,7 +73,8 @@ infile="./name.csv"
 
 #infile="./test.csv"
 
-inf=open(infile,"r")
+inf=open(infile,"r",encoding="latin-1")
+
 for l in inf:
 	k=l.strip().split()
 	C1.append(k[0])
