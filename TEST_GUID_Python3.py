@@ -46,14 +46,14 @@ def text_to_id(text):
     :returns: The processed String.
     :rtype: String.
     """
-    text = strip_accents(text.lower())
+    text = strip_accents(text)
     text = re.sub('[ ]+', '_', text)
     text = re.sub('[^0-9a-zA-Z_-]', '', text)
     text = re.sub('-', '', text)
     text = re.sub('_', '', text)
     text = text.replace('\/', '')
     text = text.replace('\\', '')
-    return text
+    return text.upper()
 
 container_final={}
 C1=[]
@@ -64,7 +64,11 @@ C5=[]
 C6=[]
 # reads the csv file in tsv format and stores each columns in a separate list
 infile="./name.csv"
-inf=open(infile,"r")
+
+
+inf=open(infile,"r",encoding="latin-1")
+
+
 for l in inf:
 	k=l.strip().split()
 	C1.append(k[0])
